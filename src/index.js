@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import Hapi from '@hapi/hapi';
+import bootstrapApi from './api/bootstrap.js';
 
 const init = async () => {
   const server = Hapi.server({
@@ -12,13 +13,7 @@ const init = async () => {
     },
   });
 
-  server.route({
-    method: 'GET',
-    path: '/',
-    handler: () => {
-      return JSON.stringify({ message: 'Hello World' });
-    },
-  });
+  await server.register(bootstrapApi);
 
   await server.start();
   console.log(`Server running on ${server.info.uri}`);
