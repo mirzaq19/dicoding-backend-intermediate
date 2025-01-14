@@ -5,14 +5,21 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./src/index.js"
+    "start": "nodemon ./src/index.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./",
+    "migrate": "node-pg-migrate"
   },
   "keywords": [],
   "author": "M. Auliya Mirzaq Romdloni",
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^21.3.12",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "joi": "^17.13.3",
+    "nanoid": "^5.0.9",
+    "node-pg-migrate": "^7.9.0",
+    "pg": "^8.13.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
