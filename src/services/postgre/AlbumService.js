@@ -31,11 +31,21 @@ export default class AlbumService {
 
     const result = await this._pool.query(query);
 
+    const songQuery = {
+      text: 'SELECT * FROM songs WHERE album_id = $1',
+      values: [id],
+    };
+
+    const songResult = await this._pool.query(songQuery);
+
     if (!result.rows.length) {
       throw new NotFoundError('Album tidak ditemukan');
     }
 
-    return result.rows[0];
+    return {
+      ...result.rows[0],
+      songs: songResult.rows,
+    };
   }
 
   async editAlbum(id, { name, year }) {
